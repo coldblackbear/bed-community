@@ -68,6 +68,11 @@ export function UserMenu({ user }: UserMenuProps) {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
+          <Link href="/profile/edit" className="cursor-pointer">
+            닉네임 변경
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link href="/posts?author=me" className="cursor-pointer">
             내 글 보기
           </Link>

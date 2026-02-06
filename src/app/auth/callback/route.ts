@@ -32,12 +32,21 @@ export async function GET(request: NextRequest) {
     )
 
     try {
-      const { error } = await supabase.auth.exchangeCodeForSession(code)
-      console.log('Auth callback - code:', code?.slice(0, 10) + '...', 'error:', error)
-      if (!error) {
+      const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+      if (!error && data.user) {
+        // Detect first-time user by checking if account was just created
+        const createdAt = new Date(data.user.created_at)
+        const now = new Date()
+        const isNewUser = (now.getTime() - createdAt.getTime()) < 30000
+
+        if (isNewUser) {
+          return NextResponse.redirect(`${origin}/profile/edit?setup=true`)
+        }
         return NextResponse.redirect(`${origin}/`)
       }
-      console.error('Auth exchange error:', JSON.stringify(error))
+      if (error) {
+        console.error('Auth exchange error:', JSON.stringify(error))
+      }
     } catch (error) {
       console.error('Auth callback exception:', error)
     }
