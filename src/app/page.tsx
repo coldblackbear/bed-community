@@ -36,17 +36,17 @@ export default async function HomePage() {
               매트리스부터 침구류까지, 숙면을 위한 모든 정보를 공유하세요
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Link href="/posts">
-                <Button size="lg" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto" asChild>
+                <Link href="/posts">
                   글 둘러보기
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/posts/new">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="w-full sm:w-auto" asChild>
+                <Link href="/posts/new">
                   글 작성하기
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -56,20 +56,20 @@ export default async function HomePage() {
       <section className="container px-4 py-12 md:py-16">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold tracking-tight">최신 글</h2>
-          <Link href="/posts">
-            <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/posts">
               전체보기
               <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
 
         {latestPosts.length === 0 ? (
           <div className="text-center py-12 text-muted-foreground">
             <p className="text-lg">아직 게시글이 없습니다. 첫 글을 작성해보세요!</p>
-            <Link href="/posts/new" className="mt-4 inline-block">
-              <Button>글 작성하기</Button>
-            </Link>
+            <Button className="mt-4" asChild>
+              <Link href="/posts/new">글 작성하기</Link>
+            </Button>
           </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -17,9 +17,9 @@ export default function NotFound() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Link href="/">
-            <Button>홈으로 돌아가기</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/">홈으로 돌아가기</Link>
+          </Button>
         </CardContent>
       </Card>
     </div>

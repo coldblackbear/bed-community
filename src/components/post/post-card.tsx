@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Post } from '@/types'
 import { getCategoryLabel } from '@/types'
 import { Card } from '@/components/ui/card'
@@ -13,6 +14,8 @@ interface PostCardProps {
 }
 
 export default function PostCard({ post }: PostCardProps) {
+  const router = useRouter()
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     const now = new Date()
@@ -29,8 +32,11 @@ export default function PostCard({ post }: PostCardProps) {
   }
 
   return (
-    <Link href={`/posts/${post.id}`}>
-      <Card className="p-6 hover:shadow-lg transition-shadow duration-200 cursor-pointer h-full">
+    <div
+      onClick={() => router.push(`/posts/${post.id}`)}
+      className="cursor-pointer"
+    >
+      <Card className="p-6 hover:shadow-lg transition-shadow duration-200 h-full">
         <div className="flex flex-col gap-3">
           {/* Category badge */}
           <Badge variant="secondary" className="w-fit">
@@ -85,6 +91,6 @@ export default function PostCard({ post }: PostCardProps) {
           </div>
         </div>
       </Card>
-    </Link>
+    </div>
   )
 }

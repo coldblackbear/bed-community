@@ -9,6 +9,8 @@ import { WriteButton } from "@/components/layout/write-button";
 import { createClient } from "@/lib/supabase/server";
 import { ThemeProvider } from "@/components/theme-provider";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/json-ld";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -107,6 +109,8 @@ export default async function RootLayout({
           </div>
           <Footer />
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

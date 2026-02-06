@@ -136,9 +136,9 @@ export default function TermsPage() {
       </div>
 
       <div className="mt-12 pt-6 border-t">
-        <Link href="/">
-          <Button variant="outline">홈으로 돌아가기</Button>
-        </Link>
+        <Button variant="outline" asChild>
+          <Link href="/">홈으로 돌아가기</Link>
+        </Button>
       </div>
     </div>
   )

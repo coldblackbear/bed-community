@@ -87,9 +87,9 @@ export default function NewPostPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             게시글을 작성하려면 먼저 로그인해주세요.
           </p>
-          <Link href="/auth/login">
-            <Button>로그인하러 가기</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/auth/login">로그인하러 가기</Link>
+          </Button>
         </Card>
       </div>
     )
@@ -99,12 +99,12 @@ export default function NewPostPage() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Header */}
       <div className="mb-8 flex items-center gap-4">
-        <Link href="/posts">
-          <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" asChild>
+          <Link href="/posts">
             <ArrowLeft className="w-4 h-4 mr-2" />
             목록으로
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <h1 className="text-3xl font-bold">새 게시글 작성</h1>
       </div>
 
@@ -200,11 +200,9 @@ export default function NewPostPage() {
 
         {/* Submit button */}
         <div className="flex justify-end gap-3">
-          <Link href="/posts">
-            <Button type="button" variant="outline" disabled={isSubmitting}>
-              취소
-            </Button>
-          </Link>
+          <Button type="button" variant="outline" disabled={isSubmitting} asChild>
+            <Link href="/posts">취소</Link>
+          </Button>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? '작성 중...' : '작성 완료'}
           </Button>

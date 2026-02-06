@@ -6,11 +6,11 @@ import { PenSquare } from "lucide-react"
 
 export function WriteButton() {
   return (
-    <Link href="/posts/new" className="hidden md:inline-flex">
-      <Button variant="default" size="sm" className="gap-2">
+    <Button variant="default" size="sm" className="gap-2 hidden md:inline-flex" asChild>
+      <Link href="/posts/new">
         <PenSquare className="h-4 w-4" />
         글쓰기
-      </Button>
-    </Link>
+      </Link>
+    </Button>
   )
 }

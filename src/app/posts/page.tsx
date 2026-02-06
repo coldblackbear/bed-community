@@ -115,12 +115,12 @@ export default async function PostsPage({
         <h1 className="text-3xl font-bold">
           {author === 'me' ? '내 글' : '커뮤니티'}
         </h1>
-        <Link href="/posts/new">
-          <Button>
+        <Button asChild>
+          <Link href="/posts/new">
             <PlusCircle className="w-4 h-4 mr-2" />
             글쓰기
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       {/* Search query display */}
@@ -131,37 +131,50 @@ export default async function PostsPage({
       )}
 
       {/* Category tabs */}
-      <Tabs value={category || 'all'} className="mb-6">
-        <TabsList>
-          <Link href={buildUrl({ category: undefined, page: '1' })}>
-            <TabsTrigger value="all">전체</TabsTrigger>
+      <div className="mb-6">
+        <div className="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-[3px] text-muted-foreground">
+          <Link
+            href={buildUrl({ category: undefined, page: '1' })}
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+              !category
+                ? 'bg-background text-foreground shadow-sm'
+                : 'hover:bg-accent/50 hover:text-foreground'
+            }`}
+          >
+            전체
           </Link>
           {ALL_CATEGORIES.map((cat) => (
             <Link
               key={cat.value}
               href={buildUrl({ category: cat.value, page: '1' })}
+              className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                category === cat.value
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'hover:bg-accent/50 hover:text-foreground'
+              }`}
             >
-              <TabsTrigger value={cat.value}>{cat.label}</TabsTrigger>
+              {cat.label}
             </Link>
           ))}
-        </TabsList>
-      </Tabs>
+        </div>
+      </div>
 
       {/* Sort toggle */}
       <div className="flex justify-end mb-6 gap-2">
-        <Link href={buildUrl({ sort: 'latest', page: '1' })}>
-          <Button variant={sort === 'latest' ? 'default' : 'outline'} size="sm">
+        <Button variant={sort === 'latest' ? 'default' : 'outline'} size="sm" asChild>
+          <Link href={buildUrl({ sort: 'latest', page: '1' })}>
             최신순
-          </Button>
-        </Link>
-        <Link href={buildUrl({ sort: 'popular', page: '1' })}>
-          <Button
-            variant={sort === 'popular' ? 'default' : 'outline'}
-            size="sm"
-          >
+          </Link>
+        </Button>
+        <Button
+          variant={sort === 'popular' ? 'default' : 'outline'}
+          size="sm"
+          asChild
+        >
+          <Link href={buildUrl({ sort: 'popular', page: '1' })}>
             인기순
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       {/* Posts grid */}
@@ -180,14 +193,23 @@ export default async function PostsPage({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2">
-          <Link
-            href={buildUrl({ page: String(Math.max(1, page - 1)) })}
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page === 1}
             className={page === 1 ? 'pointer-events-none opacity-50' : ''}
+            asChild={page !== 1}
           >
-            <Button variant="outline" size="sm" disabled={page === 1}>
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-          </Link>
+            {page === 1 ? (
+              <span>
+                <ChevronLeft className="w-4 h-4" />
+              </span>
+            ) : (
+              <Link href={buildUrl({ page: String(Math.max(1, page - 1)) })}>
+                <ChevronLeft className="w-4 h-4" />
+              </Link>
+            )}
+          </Button>
 
           <div className="flex gap-1">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => {
@@ -198,15 +220,15 @@ export default async function PostsPage({
                 (p >= page - 1 && p <= page + 1)
               ) {
                 return (
-                  <Link key={p} href={buildUrl({ page: String(p) })}>
-                    <Button
-                      variant={p === page ? 'default' : 'outline'}
-                      size="sm"
-                      className="w-10"
-                    >
-                      {p}
-                    </Button>
-                  </Link>
+                  <Button
+                    key={p}
+                    variant={p === page ? 'default' : 'outline'}
+                    size="sm"
+                    className="w-10"
+                    asChild
+                  >
+                    <Link href={buildUrl({ page: String(p) })}>{p}</Link>
+                  </Button>
                 )
               } else if (p === page - 2 || p === page + 2) {
                 return (
@@ -219,20 +241,27 @@ export default async function PostsPage({
             })}
           </div>
 
-          <Link
-            href={buildUrl({ page: String(Math.min(totalPages, page + 1)) })}
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page === totalPages}
             className={
               page === totalPages ? 'pointer-events-none opacity-50' : ''
             }
+            asChild={page !== totalPages}
           >
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={page === totalPages}
-            >
-              <ChevronRight className="w-4 h-4" />
-            </Button>
-          </Link>
+            {page === totalPages ? (
+              <span>
+                <ChevronRight className="w-4 h-4" />
+              </span>
+            ) : (
+              <Link
+                href={buildUrl({ page: String(Math.min(totalPages, page + 1)) })}
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            )}
+          </Button>
         </div>
       )}
     </div>

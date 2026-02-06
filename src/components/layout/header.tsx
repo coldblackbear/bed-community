@@ -37,27 +37,21 @@ export function Header({ children, user }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
-            <Link href="/posts">
-              <Button variant="ghost" size="sm">
-                전체글
-              </Button>
-            </Link>
-            <Link href="/products">
-              <Button variant="ghost" size="sm">
-                매트리스 DB
-              </Button>
-            </Link>
-            <Link href="/quiz">
-              <Button variant="ghost" size="sm">
-                추천 퀴즈
-              </Button>
-            </Link>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/posts">전체글</Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/products">매트리스 DB</Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/quiz">추천 퀴즈</Link>
+            </Button>
             {ALL_CATEGORIES.slice(0, 3).map((category) => (
-              <Link key={category.value} href={`/posts?category=${category.value}`}>
-                <Button variant="ghost" size="sm">
+              <Button key={category.value} variant="ghost" size="sm" asChild>
+                <Link href={`/posts?category=${category.value}`}>
                   {category.label}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             ))}
           </nav>
         </div>
@@ -80,11 +74,9 @@ export function Header({ children, user }: HeaderProps) {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           {children || (
-            <Link href="/auth/login" className="hidden md:block">
-              <Button variant="outline" size="sm">
-                로그인
-              </Button>
-            </Link>
+            <Button variant="outline" size="sm" className="hidden md:flex" asChild>
+              <Link href="/auth/login">로그인</Link>
+            </Button>
           )}
 
           {/* Mobile Menu Button */}

@@ -114,9 +114,9 @@ export default function EditPostPage() {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <Card className="p-8 text-center">
           <h1 className="text-2xl font-bold mb-4 text-red-600">{error}</h1>
-          <Link href="/posts">
-            <Button>목록으로 돌아가기</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/posts">목록으로 돌아가기</Link>
+          </Button>
         </Card>
       </div>
     )
@@ -126,12 +126,12 @@ export default function EditPostPage() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Header */}
       <div className="mb-8 flex items-center gap-4">
-        <Link href={`/posts/${postId}`}>
-          <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" asChild>
+          <Link href={`/posts/${postId}`}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             취소
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <h1 className="text-3xl font-bold">게시글 수정</h1>
       </div>
 
@@ -227,11 +227,9 @@ export default function EditPostPage() {
 
         {/* Submit button */}
         <div className="flex justify-end gap-3">
-          <Link href={`/posts/${postId}`}>
-            <Button type="button" variant="outline" disabled={isSubmitting}>
-              취소
-            </Button>
-          </Link>
+          <Button type="button" variant="outline" disabled={isSubmitting} asChild>
+            <Link href={`/posts/${postId}`}>취소</Link>
+          </Button>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? '수정 중...' : '수정 완료'}
           </Button>

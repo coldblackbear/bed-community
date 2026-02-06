@@ -51,26 +51,28 @@ export function MobileNav({ user }: MobileNavProps) {
         <div className="mt-6 space-y-6">
           {/* Main Navigation */}
           <nav className="space-y-1">
-            <Link href="/" onClick={handleLinkClick}>
-              <Button
-                variant="ghost"
-                className="w-full justify-start gap-2"
-                size="sm"
-              >
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-2"
+              size="sm"
+              asChild
+            >
+              <Link href="/" onClick={handleLinkClick}>
                 <Home className="h-4 w-4" />
                 홈
-              </Button>
-            </Link>
-            <Link href="/posts" onClick={handleLinkClick}>
-              <Button
-                variant="ghost"
-                className="w-full justify-start gap-2"
-                size="sm"
-              >
+              </Link>
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-2"
+              size="sm"
+              asChild
+            >
+              <Link href="/posts" onClick={handleLinkClick}>
                 <FileText className="h-4 w-4" />
                 전체글
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </nav>
 
           <Separator />
@@ -83,19 +85,20 @@ export function MobileNav({ user }: MobileNavProps) {
             </div>
             <nav className="space-y-1">
               {ALL_CATEGORIES.map((category) => (
-                <Link
+                <Button
                   key={category.value}
-                  href={`/posts?category=${category.value}`}
-                  onClick={handleLinkClick}
+                  variant="ghost"
+                  className="w-full justify-start"
+                  size="sm"
+                  asChild
                 >
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start"
-                    size="sm"
+                  <Link
+                    href={`/posts?category=${category.value}`}
+                    onClick={handleLinkClick}
                   >
                     {category.label}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               ))}
             </nav>
           </div>
@@ -105,18 +108,18 @@ export function MobileNav({ user }: MobileNavProps) {
           {/* Auth Section */}
           {user ? (
             <div className="space-y-2">
-              <Link href="/posts/new" onClick={handleLinkClick}>
-                <Button variant="default" className="w-full gap-2" size="sm">
+              <Button variant="default" className="w-full gap-2" size="sm" asChild>
+                <Link href="/posts/new" onClick={handleLinkClick}>
                   <PenSquare className="h-4 w-4" />
                   글쓰기
-                </Button>
-              </Link>
-              <Link href="/posts?author=me" onClick={handleLinkClick}>
-                <Button variant="ghost" className="w-full justify-start gap-2" size="sm">
+                </Link>
+              </Button>
+              <Button variant="ghost" className="w-full justify-start gap-2" size="sm" asChild>
+                <Link href="/posts?author=me" onClick={handleLinkClick}>
                   <User className="h-4 w-4" />
                   내 글 보기
-                </Button>
-              </Link>
+                </Link>
+              </Button>
               <Button
                 variant="ghost"
                 className="w-full justify-start gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
@@ -129,11 +132,11 @@ export function MobileNav({ user }: MobileNavProps) {
             </div>
           ) : (
             <div className="space-y-1">
-              <Link href="/auth/login" onClick={handleLinkClick}>
-                <Button variant="outline" className="w-full" size="sm">
+              <Button variant="outline" className="w-full" size="sm" asChild>
+                <Link href="/auth/login" onClick={handleLinkClick}>
                   로그인
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           )}
         </div>

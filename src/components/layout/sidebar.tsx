@@ -21,11 +21,9 @@ export async function Sidebar() {
             <p className="text-sm text-muted-foreground">
               수면 자세와 체형을 기반으로 최적의 매트리스를 추천해드립니다
             </p>
-            <Link href="/quiz" className="block">
-              <Button className="w-full" size="sm">
-                추천 퀴즈 시작하기 →
-              </Button>
-            </Link>
+            <Button className="w-full" size="sm" asChild>
+              <Link href="/quiz">추천 퀴즈 시작하기 →</Link>
+            </Button>
           </div>
         </CardContent>
       </Card>
