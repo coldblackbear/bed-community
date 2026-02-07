@@ -45,9 +45,6 @@ export function Header({ children, user }: HeaderProps) {
               <Link href="/posts">전체글</Link>
             </Button>
             <Button variant="ghost" size="sm" asChild>
-              <Link href="/products">매트리스 DB</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
               <Link href="/quiz">추천 퀴즈</Link>
             </Button>
             {ALL_CATEGORIES.slice(0, 3).map((category) => (
