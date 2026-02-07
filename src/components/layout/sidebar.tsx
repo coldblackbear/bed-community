@@ -12,7 +12,7 @@ export async function Sidebar() {
   const popularPosts = await getPopularPosts(5)
 
   return (
-    <aside className="w-full space-y-4">
+    <aside className="hidden lg:block w-72 shrink-0 space-y-4">
       {/* Quiz Banner */}
       <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-blue-200 dark:border-blue-900">
         <CardContent className="pt-6">
