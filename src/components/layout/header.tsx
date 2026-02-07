@@ -7,7 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ALL_CATEGORIES, type Profile } from "@/types"
 import { useRouter } from "next/navigation"
-import { MobileNav } from "./mobile-nav"
+import dynamic from "next/dynamic"
+const MobileNav = dynamic(
+  () => import("./mobile-nav").then((m) => ({ default: m.MobileNav })),
+  { ssr: false }
+)
 import { ThemeToggle } from "@/components/theme-toggle"
 
 interface HeaderProps {

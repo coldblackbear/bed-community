@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { Post, Category } from '@/types'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -88,11 +89,14 @@ export async function getPost(id: string) {
     return null
   }
 
-  // Increment view count
-  await supabase
-    .from('posts')
-    .update({ view_count: post.view_count + 1 })
-    .eq('id', id)
+  // Increment view count using admin client to bypass RLS
+  const admin = createAdminClient()
+  if (admin) {
+    await admin
+      .from('posts')
+      .update({ view_count: post.view_count + 1 })
+      .eq('id', id)
+  }
 
   return {
     ...post,
