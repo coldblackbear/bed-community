@@ -11,7 +11,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
     <div className="prose prose-slate dark:prose-invert max-w-none">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
         components={{
           h1: ({ children }) => (
             <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>
